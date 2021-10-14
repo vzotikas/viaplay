@@ -1,0 +1,6 @@
+[[redirects]]
+  from = "/pc-se/serier/samtliga"
+  to = "https://content.viaplay.se/pc-se/serier/samtliga"
+  status = 200
+  force = true
+  headers = {X-From = "Netlify"}
