@@ -1,5 +1,10 @@
 import "./App.css";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  HashRouter,
+} from "react-router-dom";
 import Header from "./components/Header";
 import Watchlist from "./components/Watchlist";
 import Add from "./components/Add";
@@ -11,7 +16,7 @@ import Home from "./components/Home";
 function App() {
   return (
     <GlobalProvider>
-      <Router>
+      <HashRouter>
         <Header />
         <Switch>
           <Route exact path="/">
@@ -28,7 +33,7 @@ function App() {
           </Route>
         </Switch>
         <Footer />
-      </Router>
+      </HashRouter>
     </GlobalProvider>
   );
 }
