@@ -34,7 +34,7 @@ const ResultCard = ({ serie }) => {
             disabled={watchlistDisabled}
             onClick={() => addSerieToWatchList(serie)}
           >
-            Add This
+            Add To Watchlist
           </button>
         </div>
       </div>

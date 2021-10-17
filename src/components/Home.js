@@ -2,11 +2,11 @@ import React, { useState, useEffect, useContext } from "react";
 import { GlobalContext } from "../context/GlobalState";
 import SeriesModal from "./SeriesModal";
 import ListSeries from "./ListSeries";
+import useKeyPress from "../hooks/useKeyPress";
 
 const Home = ({ serie, type }) => {
   // gets the data from the store GlobalContext
   const { data } = useContext(GlobalContext);
-
   const [seriesList, setSeriesList] = useState([]);
 
   // creates a culumns variable from the css value
@@ -48,33 +48,6 @@ const Home = ({ serie, type }) => {
   }, [data]);
 
   // function that attaches a keypress to respective key pressed and handles the key press event
-  const useKeyPress = (targetKey) => {
-    const [keyPressed, setKeyPressed] = useState(false);
-
-    function downHandler({ key }) {
-      if (key === targetKey) {
-        setKeyPressed(true);
-      }
-    }
-
-    const upHandler = ({ key }) => {
-      if (key === targetKey) {
-        setKeyPressed(false);
-      }
-    };
-
-    useEffect(() => {
-      window.addEventListener("keydown", downHandler);
-      window.addEventListener("keyup", upHandler);
-
-      return () => {
-        window.removeEventListener("keydown", downHandler);
-        window.removeEventListener("keyup", upHandler);
-      };
-    });
-
-    return keyPressed;
-  };
 
   const [selected, setSelected] = useState(undefined);
   const rightPress = useKeyPress("ArrowRight");
@@ -166,13 +139,6 @@ const Home = ({ serie, type }) => {
       />
       <div className="serie-page">
         <div className="container">
-          {/* <div className="header">
-            <h1 className="heading">Series</h1>
-          </div> */}
-
-          {/* <h1 className="selected">
-            {selected ? selected.name : "Select a series"}
-          </h1> */}
           <div className="serie-grid">
             {seriesList.map((series, i) => (
               <div key={series.id}>
