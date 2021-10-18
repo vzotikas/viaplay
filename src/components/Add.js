@@ -1,10 +1,9 @@
-import React, { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 import ResultCard from "./ResultCard";
 import { GlobalContext } from "../context/GlobalState";
 
 const Add = () => {
   const { data } = useContext(GlobalContext);
-
   const [query, setQuery] = useState("");
   const [series, setSeries] = useState("");
   const [seriesTitle, setSeriesTitle] = useState([]);
@@ -32,6 +31,7 @@ const Add = () => {
         }
       );
     }
+
     setResults([
       seriesTitle.filter((element) =>
         element._links.self.title.includes(query)

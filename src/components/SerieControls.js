@@ -1,5 +1,4 @@
-import React, { useContext } from "react";
-
+import { useContext } from "react";
 import "@fortawesome/fontawesome-free/css/all.css";
 import { GlobalContext } from "../context/GlobalState";
 

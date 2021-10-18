@@ -1,8 +1,9 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { GlobalContext } from "../context/GlobalState";
 
 const ResultCard = ({ serie }) => {
   const { addSerieToWatchList, watchlist, watched } = useContext(GlobalContext);
+
   const storedSerie = watchlist.find(
     (object) => object._links.self.title === serie._links.self.title
   );
@@ -22,7 +23,6 @@ const ResultCard = ({ serie }) => {
       <div className="poster-wrapper">
         <img src={serie.content.images.landscape.url} alt="" />
       </div>
-
       <div className="info">
         <div className="header">
           <h3 className="title"> {serie._links.self.title}</h3>
@@ -41,4 +41,5 @@ const ResultCard = ({ serie }) => {
     </div>
   );
 };
+
 export default ResultCard;

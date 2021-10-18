@@ -31,16 +31,3 @@ const useFetch = (url) => {
 };
 
 export default useFetch;
-
-// useEffect(() => {
-//     fetch("/pc-se/serier/samtliga")
-//       .then((res) => res.json())
-//       .then((data) => {
-//         if (!data.errors) {
-//           setSeries(data);
-//         } else {
-//           setSeries([]);
-//         }
-//       });
-//     setSeriesTitle([]);
-//   }, []);

@@ -1,152 +1,53 @@
-import React, { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import { GlobalContext } from "../context/GlobalState";
 import SeriesModal from "./SeriesModal";
-import ListSeries from "./ListSeries";
-import useKeyPress from "../hooks/useKeyPress";
+import SeriesListItem from "./SeriesListItem";
+import useArrows from "../hooks/useArrows";
+import useSetSeriesList from "../hooks/useSetSeriesList";
 
 const Home = ({ serie, type }) => {
-  // gets the data from the store GlobalContext
-  const { data } = useContext(GlobalContext);
-  const [seriesList, setSeriesList] = useState([]);
+  const state = useContext(GlobalContext);
+  const data = state.data[0];
+  const seriesList = useSetSeriesList({ data });
+  const [hoveredItem, setHoveredItem] = useState(undefined);
+  const [selectedSeries, setSelectedSeries] = useState(undefined);
+  const [modalIsOpen, setIsOpen] = useState(false);
 
-  // creates a culumns variable from the css value
-  const [columns, setColumns] = useState(
-    Number(
-      getComputedStyle(document.documentElement).getPropertyValue("--columns")
-    )
-  );
-
-  // updates the columns value depending on screen size
-  useEffect(() => {
-    function handleResize() {
-      setColumns(
-        Number(
-          getComputedStyle(document.documentElement).getPropertyValue(
-            "--columns"
-          )
-        )
-      );
-    }
-    window.addEventListener("resize", handleResize);
+  const cursorIndex = useArrows({
+    seriesList,
+    setSelectedSeries,
+    openModal,
+    hoveredItem,
   });
 
-  // set the series list from data
-  useEffect(() => {
-    data.length > 0 &&
-      data[0]._embedded["viaplay:blocks"][0]._embedded["viaplay:products"].map(
-        (serie, index) =>
-          setSeriesList((series) => [
-            ...series,
-            {
-              id: index,
-              name: serie._links.self.title,
-              image: serie.content.images.landscape.url,
-              synopsis: serie.content.synopsis,
-            },
-          ])
-      );
-  }, [data]);
-
-  // function that attaches a keypress to respective key pressed and handles the key press event
-
-  const [selected, setSelected] = useState(undefined);
-  const rightPress = useKeyPress("ArrowRight");
-  const leftPress = useKeyPress("ArrowLeft");
-  const downPress = useKeyPress("ArrowDown");
-  const upPress = useKeyPress("ArrowUp");
-  const enterPress = useKeyPress("Enter");
-  const [cursor, setCursor] = useState(0);
-  const [hovered, setHovered] = useState(undefined);
-
-  useEffect(() => {
-    if (seriesList.length && rightPress) {
-      setCursor((prevState) =>
-        prevState < seriesList.length - 1 ? prevState + 1 : prevState
-      );
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [rightPress]);
-
-  useEffect(() => {
-    if (seriesList.length && leftPress) {
-      setCursor((prevState) =>
-        prevState < seriesList.length + 1 && prevState > 0
-          ? prevState - 1
-          : prevState
-      );
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [leftPress]);
-
-  useEffect(() => {
-    if (seriesList.length && downPress) {
-      setCursor((prevState) =>
-        prevState >= 0 && prevState < seriesList.length - columns
-          ? prevState + columns
-          : prevState
-      );
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [downPress]);
-
-  useEffect(() => {
-    if (seriesList.length && upPress) {
-      setCursor((prevState) =>
-        prevState > 0 && prevState >= columns ? prevState - columns : prevState
-      );
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [upPress]);
-
-  useEffect(() => {
-    if (seriesList.length && hovered) {
-      setCursor(seriesList.indexOf(hovered));
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [hovered]);
-
-  // ------------
-
-  const [modalIsOpen, setIsOpen] = useState(false);
+  function openModal() {
+    setSelectedSeries(seriesList[cursorIndex]);
+    setIsOpen(true);
+  }
 
   function closeModal() {
     setIsOpen(false);
   }
 
-  useEffect(() => {
-    if (seriesList.length && enterPress) {
-      setSelected(seriesList[cursor]);
-      openModal();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cursor, enterPress]);
-
-  function openModal() {
-    setSelected(seriesList[cursor]);
-
-    setIsOpen(true);
-  }
-
   return (
     <div>
       <SeriesModal
-        selected={selected}
-        testi="ox"
+        selectedSeries={selectedSeries}
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
-        contentLabel="Example Modal"
-        enterPress
+        contentLabel="Series Modal"
       />
       <div className="serie-page">
         <div className="container">
           <div className="serie-grid">
-            {seriesList.map((series, i) => (
+            {seriesList.map((series, index) => (
               <div key={series.id}>
-                <ListSeries
+                <SeriesListItem
                   onRequestOpen={openModal}
-                  active={i === cursor}
+                  active={index === cursorIndex}
                   series={series}
-                  setHovered={setHovered}
+                  setHoveredItem={setHoveredItem}
+                  key={index}
                 />
               </div>
             ))}

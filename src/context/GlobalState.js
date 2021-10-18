@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useReducer, useState } from "react";
+import { createContext, useEffect, useReducer, useState } from "react";
 import AppReducer from "./AppReducer";
 import useFetch from "../hooks/useFetch";
 
@@ -8,6 +8,7 @@ export const GlobalContext = createContext();
 // provider components
 export const GlobalProvider = (props) => {
   const { data, loading, error } = useFetch("/pc-se/serier/samtliga");
+
   // initial state
   const [initialState, setInitialState] = useState({
     data: [],

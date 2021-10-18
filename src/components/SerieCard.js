@@ -1,4 +1,3 @@
-import React from "react";
 import SerieControls from "./SerieControls";
 
 const SerieCard = ({ serie, type }) => {

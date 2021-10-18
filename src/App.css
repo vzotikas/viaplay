@@ -21,16 +21,7 @@ body {
   margin-left: auto;
 }
 
-/* .modal {
-  background-color: #1d1d27;
-  position: fixed;
-  top: 30%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-} */
-
 .modal {
-  /* display: none; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -39,6 +30,7 @@ body {
   width: 100%;
   height: 100%;
 }
+
 .modal-inner {
   background-color: white;
   border-radius: 0.5em;
@@ -46,12 +38,13 @@ body {
   padding: 2em;
   margin: auto;
 }
+
 .modal-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* border-bottom: 2px solid black; */
 }
+
 .modal-overlay {
   width: 100%;
   height: 100%;
@@ -59,7 +52,6 @@ body {
   top: 0;
   left: 0;
   background-color: black;
-  /* opacity: 0.5; */
 }
 
 .modal-close {
@@ -70,6 +62,7 @@ body {
   margin: 0;
   padding: 0;
 }
+
 .modal-close :hover {
   color: var(--secondary);
 }
@@ -79,20 +72,16 @@ body {
   display: inline-block;
   align-items: center;
   justify-content: center;
-  /* height: 100px; */
 }
 
 .modal-image {
   position: relative;
-
   display: flex;
   align-items: center;
   justify-content: center;
   max-width: 100%;
   height: auto;
 }
-
-/* // */
 
 .logo {
   vertical-align: middle;
@@ -159,7 +148,6 @@ input:focus {
   outline: none;
 }
 
-/* Header Styles */
 header {
   background-color: var(--primary);
 }
@@ -204,7 +192,6 @@ header .nav-links li:last-child {
   margin-right: 0;
 }
 
-/* Footer Styles */
 footer {
   background-color: var(--primary);
   position: fixed;
@@ -215,12 +202,8 @@ footer {
   text-align: center;
   font-size: 0.8rem;
   line-height: 40px;
-  /* margin: auto; */
-  /* padding: auto; */
-  /* vertical-align: middle; */
 }
 
-/* Add Page */
 .add-content {
   padding: 50px 0;
   max-width: 600px;
@@ -287,7 +270,6 @@ footer {
   margin-right: 10px;
 }
 
-/* Serie Page */
 .serie-page {
   padding: 30px 0;
 }
@@ -321,7 +303,6 @@ footer {
 }
 
 .selected {
-  /* display: block; */
   background-color: var(--secondary);
   padding: 5px 15px;
   font-size: 1.5rem;
@@ -330,7 +311,6 @@ footer {
   height: 40px;
   border-radius: 999px;
   text-align: center;
-  /* color: var(--primary); */
 }
 
 @media (min-width: 480px) {
@@ -371,7 +351,6 @@ footer {
 
 .serie-card {
   width: 100%;
-  /* border-radius: 5px; */
   overflow: hidden;
   position: relative;
   border: 1px solid #eaeaea;
@@ -395,14 +374,12 @@ footer {
 }
 
 .serie-card:hover {
-  /* border: 0.2rem solid #b9318a; */
   cursor: pointer;
   border-color: #ffffff;
   box-shadow: 0px 0px 10px 4px #999999;
 }
 
 .serie-card:hover .overlay {
-  /* border: 0.2rem solid #b9318a; */
   cursor: pointer;
   border-color: #ffffff;
   box-shadow: 0px 0px 10px 4px #999999;
