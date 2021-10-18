@@ -80,43 +80,58 @@ ReactDOM.render(
 reportWebVitals();
 ```
 
-# Getting Started with Create React App
+# Usage
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The application is displaying a list of TV series. The user can select a series and see more information. Interaction is possible both with the keyboard (arrow keys, enter and escape key) and the mouse. Once the modal window is open the user can go back to the list either by clicking the x button or by hitting the escape key. The application is responsive and it is adjusted to the size of the window.
 
-## Available Scripts
+## Design decisions
 
 In the project directory, you can run:
 
-### `npm start`
+I decided to use React since it is the most popular and tested JavaScript library for building user interfaces.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+For better performance and other features like API Routes, File-system Routing, hybrid SSG and SSR, Image Optimization and more I decided to go with Next.js.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+I used the Functional Components approach and utilized the power of React’s built-in Hooks plus the advantage to be able to create my own custom Hooks.
 
-### `npm test`
+## Dependencies
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### `react-modal`
 
-### `npm run build`
+I used react-modal which is an accessible modal dialog component for React in order to display more information about the series.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### `@fortawesome`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+I used Font Awesome and Google Fonts for better looking fonts and icons.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Custom React hooks
 
-### `npm run eject`
+### `useFetch`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Used to call an API and return the data, loading, and any error.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### `useKeyPress`
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Used to detect a keypress and define the current key that is pressed.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### `useArrows`
+
+Used to utilize the arrow keys functionality in order to navigate the list.
+
+### `useSetSeriesList`
+
+Used to extract an array of objects with the information needed and provide it to the other components of the application.
+
+## CSS
+
+React and Next.js supports CSS Modules using the [name].module.css file naming convention.
+CSS Modules locally scope CSS by automatically creating a unique class name. This allows you to use the same CSS class name in different files without worrying about collisions.
+This behavior makes CSS Modules the ideal way to include component-level CSS. CSS Module files can be imported anywhere in your application.
+
+## Running Tests
+
+For testing i use Jest that is embeded to React as its test runner. Jest is a delightful JavaScript Testing Framework with a focus on simplicity.
+
+It works with projects using: Babel, TypeScript, Node, React, Angular, Vue and more!
+
+Jest is a Node-based runner. This means that the tests always run in a Node environment and not in a real browser. This lets us enable fast iteration speed and prevent flakiness.

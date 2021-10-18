@@ -29,6 +29,7 @@ export const GlobalProvider = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
+  // reducer initialization
   const [state, dispatch] = useReducer(AppReducer, initialState);
 
   useEffect(() => {

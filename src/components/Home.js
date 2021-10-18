@@ -13,6 +13,7 @@ const Home = ({ serie, type }) => {
   const [selectedSeries, setSelectedSeries] = useState(undefined);
   const [modalIsOpen, setIsOpen] = useState(false);
 
+  // utilizes the useArrow hook to navigate the list
   const cursorIndex = useArrows({
     seriesList,
     setSelectedSeries,

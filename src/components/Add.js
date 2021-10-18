@@ -6,16 +6,17 @@ const Add = () => {
   const { data } = useContext(GlobalContext);
   const [query, setQuery] = useState("");
   const [series, setSeries] = useState("");
-  const [seriesTitle, setSeriesTitle] = useState([]);
-  const [results, setResults] = useState([]);
+  const [seriesList, setSeriesList] = useState([]);
+  const [searchResults, setSearchResults] = useState([]);
 
+  // sets the series object from the data
   useEffect(() => {
     if (data) {
       setSeries(data[0]);
     } else {
       setSeries([]);
     }
-    setSeriesTitle([]);
+    setSeriesList([]);
   }, [data]);
 
   const onChange = (event) => {
@@ -23,30 +24,28 @@ const Add = () => {
     setQuery(event.target.value);
   };
 
+  // creates a list of the series
   useEffect(() => {
     if (series) {
       series._embedded["viaplay:blocks"][0]._embedded["viaplay:products"].map(
-        (title) => {
-          return seriesTitle.push(title);
+        (list) => {
+          return seriesList.push(list);
         }
       );
     }
 
-    setResults([
-      seriesTitle.filter((element) =>
-        element._links.self.title.includes(query)
-      ),
+    setSearchResults([
+      seriesList.filter((element) => element._links.self.title.includes(query)),
     ]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [series, seriesTitle]);
+  }, [series, seriesList]);
 
+  // sets the search reasults
   useEffect(() => {
-    setResults([
-      seriesTitle.filter((element) =>
-        element._links.self.title.includes(query)
-      ),
+    setSearchResults([
+      seriesList.filter((element) => element._links.self.title.includes(query)),
     ]);
-  }, [query, seriesTitle]);
+  }, [query, seriesList]);
 
   return (
     <div className="add-page">
@@ -61,9 +60,9 @@ const Add = () => {
             />
           </div>
 
-          {(results.length > 0 && query && (
+          {(searchResults.length > 0 && query && (
             <ul className="results">
-              {results[0].map((serie, index) => (
+              {searchResults[0].map((serie, index) => (
                 <li key={index}>
                   <ResultCard serie={serie} />
                 </li>
@@ -71,7 +70,7 @@ const Add = () => {
             </ul>
           )) || (
             <ul className="results">
-              {seriesTitle.map((serie, index) => (
+              {seriesList.map((serie, index) => (
                 <li key={index}>
                   <ResultCard serie={serie} />
                 </li>

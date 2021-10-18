@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { GlobalContext } from "../context/GlobalState";
 
 const ResultCard = ({ serie }) => {
+  // uses the GlobalContext Provider
   const { addSerieToWatchList, watchlist, watched } = useContext(GlobalContext);
 
   const storedSerie = watchlist.find(

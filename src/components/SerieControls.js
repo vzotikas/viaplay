@@ -3,6 +3,7 @@ import "@fortawesome/fontawesome-free/css/all.css";
 import { GlobalContext } from "../context/GlobalState";
 
 const SerieControls = ({ serie, type }) => {
+  // uses the GlobalContext Provider
   const {
     removeSerieFromWatchList,
     addSerieToWatched,
