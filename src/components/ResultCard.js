@@ -22,7 +22,14 @@ const ResultCard = ({ serie }) => {
   return (
     <div className="result-card">
       <div className="poster-wrapper">
-        <img src={serie.content.images.landscape.url} alt="" />
+        <img
+          src={
+            serie.content.images.landscape
+              ? serie.content.images.landscape.url
+              : ""
+          }
+          alt=""
+        />
       </div>
       <div className="info">
         <div className="header">

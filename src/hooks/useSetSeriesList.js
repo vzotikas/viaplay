@@ -12,7 +12,9 @@ const useSetSeriesList = ({ data }) => {
             {
               id: index,
               title: series._links.self.title,
-              image: series.content.images.landscape.url,
+              image: series.content.images.landscape
+                ? series.content.images.landscape.url
+                : "",
               synopsis: series.content.synopsis,
             },
           ])
