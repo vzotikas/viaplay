@@ -5,7 +5,14 @@ const SerieCard = ({ serie, type }) => {
     <div>
       <div className="serie-card">
         <div className="overlay"></div>
-        <img src={serie.content.images.landscape.url} alt="" />
+        <img
+          src={
+            serie.content.images.landscape
+              ? serie.content.images.landscape.url
+              : ""
+          }
+          alt=""
+        />
         <SerieControls type={type} serie={serie} />
       </div>
     </div>
